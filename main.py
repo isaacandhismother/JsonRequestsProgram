@@ -25,6 +25,8 @@ def main():
         response = requests.get(f'{url_template}{num}')
         if response.status_code == 200:
             product_list.append(response.json())
+        else:
+            print(response)
 
     for number in range(1, 101):
         thread = threading.Thread(target=get_response, args=(number,))
