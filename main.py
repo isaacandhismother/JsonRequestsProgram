@@ -52,19 +52,22 @@ def main():
 
     sort()
 
-    for product in product_list:
-        if product['id'] == 1:
-            file.write('[\n')
-        try:
-            encoded_product = json.dumps(product).encode('utf-8')
-            encoded_product = encoded_product.decode('utf-8')
-            file.write(f'{encoded_product}')
-            if product['id'] != len(product_list):
-                file.write(',\n')
-        except(UnicodeError):
-            print(f'Unicode error: {product}')
-        if product['id'] == len(product_list):
-            file.write('\n]')
+    def write_file():
+        for product in product_list:
+            if product['id'] == 1:
+                file.write('[\n')
+            try:
+                encoded_product = json.dumps(product).encode('utf-8')
+                encoded_product = encoded_product.decode('utf-8')
+                file.write(f'{encoded_product}')
+                if product['id'] != len(product_list):
+                    file.write(',\n')
+            except(UnicodeError):
+                print(f'Unicode error: {product}')
+            if product['id'] == len(product_list):
+                file.write('\n]')
+
+    write_file()
 
     file.close()
 
